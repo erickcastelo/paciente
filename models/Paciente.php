@@ -117,14 +117,15 @@ class Paciente extends Model
         return $response->data;
     }
 
-    public function getConsultas()
+    public function getConsultas($situacao)
     {
         $baseUrl = Yii::$app->params['baseUrl'];
 
-        $cliente = new Client(['baseUrl' => $baseUrl .'/paciente']);
+        $cliente = new Client(['baseUrl' => $baseUrl .'/consulta']);
 
         $response = $cliente
-            ->get('minhas-consultas')
+            ->get('consultas-pacientes')
+            ->setData(['situacao' => $situacao])
             ->addHeaders([
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Authorization' => 'Bearer ' . Yii::$app->user->identity->getAuthKey()
@@ -133,6 +134,8 @@ class Paciente extends Model
 
         return Json::decode($response->content);
     }
+
+
 
     public function getPaciente()
     {
@@ -149,5 +152,23 @@ class Paciente extends Model
             ->send();
 
         return new static($response->data);
+    }
+
+    public function finalizaConsulta($codigo)
+    {
+        $baseUrl = Yii::$app->params['baseUrl'];
+
+        $cliente = new Client(['baseUrl' => $baseUrl .'/consulta']);
+
+        $response = $cliente
+            ->get('finalizar-consulta')
+            ->setData(['codigo' => $codigo])
+            ->addHeaders([
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Authorization' => 'Bearer ' . Yii::$app->user->identity->getAuthKey()
+            ])
+            ->send();
+
+        return $response->data;
     }
 }

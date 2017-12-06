@@ -2,9 +2,10 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-$this->title = 'Minhas Consultas';
+$this->title = 'Consultas Finalizadas';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -37,17 +38,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
 
 
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    'template' => '{teste}',
-                    'buttons' => [
-                        'teste' => function($url, $model){
-                            $urlModel = \yii\helpers\Url::to(['consulta/finalizar', 'id' => $model['codigo']]);
-                            return Html::a('<i style="font-size: 20px;te" class="fa fa-check"></i>',
-                                $urlModel, ['class' => 'center-block']);
-                        }
-                    ]
-                ]
+//                [
+//                    'class' => 'yii\grid\ActionColumn',
+//                    'template' => '{teste}',
+//                    'buttons' => [
+//                        'teste' => function($url, $model){
+//                            $urlModel = Url::to(['consulta/finalizar', 'id' => $model['codigo']]);
+//
+//                            return Html::a('<i style="font-size: 20px;te" class="fa fa-check"></i>',
+//                                $urlModel, ['class' => 'center-block']);
+//                        }
+//                    ]
+//                ]
             ]
         ]) ?>
         <?php Pjax::end() ?>

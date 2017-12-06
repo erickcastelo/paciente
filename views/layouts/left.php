@@ -42,7 +42,15 @@ $foto = $session['usuario']['foto'] === null ? $imagemPadrao : $session['usuario
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Minhas Consultas', 'icon' => 'file-code-o', 'url' => ['consulta/minhas-consultas']],
+                    [
+                        'label' => 'Minhas Consultas',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Consultas Pendentes', 'icon' => 'file-code-o', 'url' => ['consulta/pendente'],],
+                            ['label' => 'Consultas Finalizadas', 'icon' => 'file-code-o', 'url' => ['consulta/finalizada'],]
+                        ],
+                    ],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
