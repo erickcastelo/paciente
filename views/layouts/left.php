@@ -1,3 +1,13 @@
+<?php
+
+$session = Yii::$app->session;
+$session->open();
+
+$imagemPadrao = Yii::$app->params['urlImagemPadrao'];
+
+$foto = $session['usuario']['foto'] === null ? $imagemPadrao : $session['usuario']['foto'];
+?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -5,10 +15,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<?= $foto ?>" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= $session['usuario']['nome'] ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -36,12 +46,13 @@
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Same tools',
+                        'label' => 'Configurações',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                            ['label' => 'Editar Dados', 'icon' => 'file-code-o', 'url' => ['configuracao/edit'],],
+                            ['label' => 'Mudar Foto', 'icon' => 'file-code-o', 'url' => ['/gii'],],
+                            ['label' => 'Pesquisar Empresas', 'icon' => 'dashboard', 'url' => ['/debug'],],
                             [
                                 'label' => 'Level One',
                                 'icon' => 'circle-o',
@@ -61,6 +72,7 @@
                             ],
                         ],
                     ],
+                    ['label' => 'Sair', 'icon' => 'sign-out', 'url' => ['/logout'], 'template' => '<a href="{url}" data-method="post">{icon}{label}</a>']
                 ],
             ]
         ) ?>

@@ -1,6 +1,8 @@
 <?php
 
+$url = 'http://192.168.0.18:8888';
 return [
     'adminEmail' => 'admin@example.com',
-    'baseUrl' => 'http://192.168.1.103:8888/api',
+    'baseUrl' => $url.'/api',
+    'urlImagemPadrao' => $url.'/img/usuarioPadrao.jpeg'
 ];

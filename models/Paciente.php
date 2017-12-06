@@ -134,4 +134,20 @@ class Paciente extends Model
         return Json::decode($response->content);
     }
 
+    public function getPaciente()
+    {
+        $baseUrl = Yii::$app->params['baseUrl'];
+
+        $cliente = new Client(['baseUrl' => $baseUrl .'/paciente']);
+
+        $response = $cliente
+            ->get('paciente')
+            ->addHeaders([
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Authorization' => 'Bearer ' . Yii::$app->user->identity->getAuthKey()
+            ])
+            ->send();
+
+        return new static($response->data);
+    }
 }

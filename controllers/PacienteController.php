@@ -39,9 +39,7 @@ class PacienteController extends Controller
 
                     return $this->render('alerta');
                 } else {
-//                    $texto = 'Erro ao tentar fazer o cadastro!';
-//                    Yii::$app->getSession()->setFlash('erro', $texto);
-                    $model->addErrors($response->data);
+                    $model->addErrors($response);
                 }
 
 
